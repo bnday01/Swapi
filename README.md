@@ -1,2 +1,4 @@
 # Swapi
-Star Wars: Univers
+Star Wars: Universe
+
+This was created using SWAPI
