@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Star Wars: Universe</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<h1>Star Wars</h1>
+	<h3>Universe</h3>
+	<div id="UI">
+		<nav>
+			<button class="navbar" id="bFilms">Films</button>
+			<button class="navbar" id="bPlanets">Planets</button>
+			<button class="navbar" id="bStarships">Starships</button>
+			<button class="navbar" id="bVehicles">Vehicles</button>
+			<button class="navbar" id="bPeople">People</button>
+			<button class="navbar" id="bSpecies">Species</button>
+		</nav>
+		<div id="container">
+			<div id="rectB" class="anim-rectangleR">
+			</div>
+			<div id="rect1" class="anim-rectangleR">
+			</div>
+			<div id="rect2" class="anim-rectangleR">
+			</div>
+			<div id="rect3" class="anim-rectangleR">
+			</div>
+			<div id="rect4" class="anim-rectangleR">
+			</div>
+			<div id="rect5" class="anim-rectangleR">
+			</div>
+			<div id="rect6" class="anim-rectangleR">
+			</div>
+			<div id="rect7" class="anim-rectangleR">
+			</div>
+			<div id="rect8" class="anim-rectangleR">
+			</div>
+			<div id="rectE" class="anim-rectangleR">
+			</div>
+
+			<div class="card" id="{{section+#}}">
+				<h4>Episode {{obj.episode_id}}: {{obj.title}}</h4>
+				<small>{{obj.release_date}}</small>
+				<img src="https://static1.squarespace.com/static/570c331be321403a73df5d4e/t/57f3b79fc534a5db61a9e09c/1475590053137/?format=500w" alt="Poster">
+				<p class="director">Directed by {{obj.director}}</p>
+				<p class="producer">Produced by {{obj.producer}}</p>
+				<h5>Featured</h5>
+				<article>
+					<div>
+					<h6>People</h6>
+					<ul>lookup({{obj.people}})</ul>
+					</div>
+					<div>
+					<h6>Planets</h6>
+					<ul>lookup({{obj.planets}})</ul>
+					</div>
+					<div>
+					<h6>Starships</h6>
+					<ul>lookup({{obj.starships}})</ul>
+					</div>
+					<div>
+					<h6>Species</h6>
+					<ul>lookup({{obj.species}})</ul>
+					</div>
+					<div>
+					<h6>Vehicles</h6>
+					<ul>lookup({{obj.vehicles}})</ul>
+					</div>
+				</article>
+				<p id="crawl">{{obj.opening_crawl}}</p>
+
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+
+</html> 
