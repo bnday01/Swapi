@@ -3,9 +3,10 @@
 <head>
 	<title>Star Wars: Universe</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://gitcdn.link/repo/bnday01/Cardify/master/Cardify.js"></script>
 </head>
 <body>
-	<h1>Star Wars</h1>
+	<a title="LucasArt and Cody escadron delta [Public domain], via Wikimedia Commons"><img width="512" alt="Star Wars Logo." src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Star_Wars_Logo..png"></a>
 	<h3>Universe</h3>
 	<div id="UI">
 		<nav>
@@ -17,26 +18,8 @@
 			<button class="navbar" id="bSpecies">Species</button>
 		</nav>
 		<div id="container">
-			<div id="rectB" class="anim-rectangleR">
-			</div>
-			<div id="rect1" class="anim-rectangleR">
-			</div>
-			<div id="rect2" class="anim-rectangleR">
-			</div>
-			<div id="rect3" class="anim-rectangleR">
-			</div>
-			<div id="rect4" class="anim-rectangleR">
-			</div>
-			<div id="rect5" class="anim-rectangleR">
-			</div>
-			<div id="rect6" class="anim-rectangleR">
-			</div>
-			<div id="rect7" class="anim-rectangleR">
-			</div>
-			<div id="rect8" class="anim-rectangleR">
-			</div>
-			<div id="rectE" class="anim-rectangleR">
-			</div>
+			<div id="rectB" class="anim-rectangleR"></div>
+			<div id="rectE" class="anim-rectangleR"></div>
 
 			<div class="card" id="{{section+#}}">
 				<h4>Episode {{obj.episode_id}}: {{obj.title}}</h4>
@@ -72,6 +55,7 @@
 			</div>
 		</div>
 	</div>
+	<img id="hud" src="https://i.pinimg.com/originals/2d/d4/f5/2dd4f53d8749ab36d1a8284821e34e4e.png">
 	<script type="text/javascript" src="script.js"></script>
 </body>
 
