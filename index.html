@@ -3,10 +3,15 @@
 <head>
 	<title>Star Wars: Universe</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script src="https://gitcdn.link/repo/bnday01/Cardify/master/Cardify.js"></script>
+	<script src="https://gitcdn.xyz/cdn/bnday01/Cardify/master/Cardify_2.js"></script>
+	<script src="scriptURLS.js"></script>
 </head>
 <body>
-	<a title="LucasArt and Cody escadron delta [Public domain], via Wikimedia Commons"><img width="512" alt="Star Wars Logo." src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Star_Wars_Logo..png"></a>
+	<div id="titleContainer">
+		<img id="dooku" src="./src/red.png" alt="Dooku Lightsaber">
+		<a title="LucasArt and Cody escadron delta [Public domain], via Wikimedia Commons"><img width="512" alt="Star Wars Logo." src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Star_Wars_Logo..png"></a>
+		<img id="luke" src="./src/blue.png" alt="Luke Lightsaber">
+	</div>
 	<h3>Universe</h3>
 	<div id="UI">
 		<nav>
@@ -14,48 +19,16 @@
 			<button class="navbar" id="bPlanets">Planets</button>
 			<button class="navbar" id="bStarships">Starships</button>
 			<button class="navbar" id="bVehicles">Vehicles</button>
-			<button class="navbar" id="bPeople">People</button>
+			<button class="navbar" id="bPeople">Characters</button>
 			<button class="navbar" id="bSpecies">Species</button>
 		</nav>
 		<div id="container">
 			<div id="rectB" class="anim-rectangleR"></div>
 			<div id="rectE" class="anim-rectangleR"></div>
+			<img id="hud" src="https://i.pinimg.com/originals/2d/d4/f5/2dd4f53d8749ab36d1a8284821e34e4e.png">
 
-			<div class="card" id="{{section+#}}">
-				<h4>Episode {{obj.episode_id}}: {{obj.title}}</h4>
-				<small>{{obj.release_date}}</small>
-				<img src="https://static1.squarespace.com/static/570c331be321403a73df5d4e/t/57f3b79fc534a5db61a9e09c/1475590053137/?format=500w" alt="Poster">
-				<p class="director">Directed by {{obj.director}}</p>
-				<p class="producer">Produced by {{obj.producer}}</p>
-				<h5>Featured</h5>
-				<article>
-					<div>
-					<h6>People</h6>
-					<ul>lookup({{obj.people}})</ul>
-					</div>
-					<div>
-					<h6>Planets</h6>
-					<ul>lookup({{obj.planets}})</ul>
-					</div>
-					<div>
-					<h6>Starships</h6>
-					<ul>lookup({{obj.starships}})</ul>
-					</div>
-					<div>
-					<h6>Species</h6>
-					<ul>lookup({{obj.species}})</ul>
-					</div>
-					<div>
-					<h6>Vehicles</h6>
-					<ul>lookup({{obj.vehicles}})</ul>
-					</div>
-				</article>
-				<p id="crawl">{{obj.opening_crawl}}</p>
-
-			</div>
 		</div>
 	</div>
-	<img id="hud" src="https://i.pinimg.com/originals/2d/d4/f5/2dd4f53d8749ab36d1a8284821e34e4e.png">
 	<script type="text/javascript" src="script.js"></script>
 </body>
 

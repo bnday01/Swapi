@@ -19,15 +19,6 @@ const SWAPIarr = [];
 
 //Let's grab the information from the SWAPI
 
-//SWAPI URLs
-const urls = [
-['https://swapi.co/api/people/', 'https://swapi.co/api/people/?page=2','https://swapi.co/api/people/?page=3','https://swapi.co/api/people/?page=4','https://swapi.co/api/people/?page=5','https://swapi.co/api/people/?page=6','https://swapi.co/api/people/?page=7','https://swapi.co/api/people/?page=8','https://swapi.co/api/people/?page=9'],
-['https://swapi.co/api/planets/','https://swapi.co/api/planets/?page=2','https://swapi.co/api/planets/?page=3','https://swapi.co/api/planets/?page=4','https://swapi.co/api/planets/?page=5','https://swapi.co/api/planets/?page=6','https://swapi.co/api/planets/?page=7'],
-['https://swapi.co/api/films/'],
-['https://swapi.co/api/starships/','https://swapi.co/api/starships/?page=2','https://swapi.co/api/starships/?page=3','https://swapi.co/api/starships/?page=4'],
-['https://swapi.co/api/vehicles/','https://swapi.co/api/vehicles/?page=2','https://swapi.co/api/vehicles/?page=3','https://swapi.co/api/vehicles/?page=4'],
-['https://swapi.co/api/species/','https://swapi.co/api/species/?page=2','https://swapi.co/api/species/?page=3','https://swapi.co/api/species/?page=4']];
-
 //Request from SWAPI server
 const getSWAPI = async function(){
 	 	return await Promise.all(urls.map(
@@ -57,6 +48,7 @@ getSWAPI();
 //Here it is-
 
 const lookup = (link) => {
+	if (link == undefined){ return "unknown"}
   
   const regExp = /https:\/\/swapi\.co\/api\/(\w+)\/(\d+)\//;
   const match = link.match(regExp);
@@ -65,7 +57,7 @@ const lookup = (link) => {
   const results = () => {
   	return SWAPI[section].filter((obj) => obj.url == link);
   }
-  return results()[0].name;
+  return results()[0].title || results()[0].name;
 }
 
 //Let's use Cardify to refine our data!
@@ -135,16 +127,25 @@ const cardFilms =  (obj) => {
 	//Let's start by creating a few constants so we dont have to chain appends
 	const base = Card.div("card", `film${obj.episode_id}`,"");
 	const article = Card.article();
+	
+	const poster = () => {
+		for (var i = 0; i < images.Episodes.length; i++){
+			if (images.Episodes[i][0] == obj.episode_id){
+			return images.Episodes[i][1];
+			}
+		}
+	}
+
 
 
 	base.append(Card.h("4","","",`Episode ${obj.episode_id}: ${obj.title}`));
 	base.append(Card.small(obj.release_date));
-	base.append(Card.img("#","Poster"));
+	base.append(Card.img(poster(),"Poster", 350, 500));
 	base.append(Card.p("","",`Directed by ${obj.director}`));
 	base.append(Card.p("","",`Directed by ${obj.producer}`));
 	base.append(Card.h("5","","","Featured"));
-	base.append(Card.p("",`crawl${obj.episode_id}`, obj.opening_crawl));
-	article.append(divTrain("People", obj.characters));
+	base.append(Card.p("crawl",`crawl${obj.episode_id}`, obj.opening_crawl));
+	article.append(divTrain("Characters", obj.characters));
 	article.append(divTrain("Planets", obj.planets));
 	article.append(divTrain("Vehicles", obj.vehicles));
 	article.append(divTrain("Species", obj.species));
@@ -156,6 +157,107 @@ const cardFilms =  (obj) => {
 }
 
 const cardPlanets = (obj) => {
+
+	const base = Card.div("card", `planets${obj.name}`);
+	const article = Card.article();
+
+	base.append(Card.h("4","","", obj.name));
+	base.append(Card.p("","", `Climate: ${obj.climate}`));
+	base.append(Card.p("","", `Terrain: ${obj.terrain}`));
+	base.append(Card.p("","", `Diameter: ${obj.diameter} km`));
+	base.append(Card.p("","", `Gravity: ${obj.gravity}`));
+	base.append(Card.p("","", `Rotation Period: ${obj.rotation_period}hrs`));
+	base.append(Card.p("","", `Population: ${obj.population}`));
+	base.append(Card.p("","", `Orbital Period: ${obj.orbital_period} RPs`));
+	article.append(divTrain("Films", obj.films));
+	article.append(divTrain("Residents", obj.residents));
+	base.append(article);
+
+	return base;
+}
+
+const cardStarhips = (obj) => {
+
+	const base = Card.div("card", `starships${obj.name}`);
+	const article = Card.article();
+
+	base.append(Card.h("4","","", obj.name));
+	base.append(Card.small(`${obj.model} by ${obj.manufacturer}`));
+	base.append(Card.p("","", `Speed: ${obj.MGLT} Megalights, HD ${obj.hyperdrive_rating} @ ${obj.max_atmosphering_speed} km/hr`));
+	base.append(Card.p("","", `Capacity: ${obj.cargo_capacity} kg`));
+	base.append(Card.p("","", `Survival Capacity: ~${obj.consumables}`));
+	base.append(Card.p("","", `Passenger Capacity: ${obj.passengers}`));
+	base.append(Card.p("","", `Crew Capacity: ${obj.crew}`));
+	base.append(Card.p("","", `Cost: ${obj.cost_in_credits} Credits`));
+	article.append(divTrain("Films", obj.films));
+	article.append(divTrain("Pilots", obj.pilots));
+	base.append(article);
+
+	return base;
+}
+
+const cardVehicles = (obj) => {
+
+	const base = Card.div("card", `vehicles${obj.name}`);
+	const article = Card.article();
+
+	base.append(Card.h("4","","", obj.name));
+	base.append(Card.small(`${obj.model} by ${obj.manufacturer}`));
+	base.append(Card.p("","", `Class: ${obj.vehicle_class}`));
+	base.append(Card.p("","", `Speed: ${obj.max_atmosphering_speed} km/hr`));
+	base.append(Card.p("","", `Capacity: ${obj.cargo_capacity} kg`));
+	base.append(Card.p("","", `Survival Capacity: ~${obj.consumables}`));
+	base.append(Card.p("","", `Passenger Capacity: ${obj.passengers}`));
+	base.append(Card.p("","", `Crew Capacity: ${obj.crew}`));
+	base.append(Card.p("","", `Cost: ${obj.cost_in_credits} Credits`));
+	article.append(divTrain("Films", obj.films));
+	article.append(divTrain("Drivers", obj.pilots));
+	base.append(article);
+
+	return base;
+}
+
+const cardPeople = (obj) => {
+
+	const base = Card.div("card", `people${obj.name}`);
+	const article = Card.article();
+	base.append(Card.h("4","","", obj.name));
+	base.append(Card.p("","", `Born  ${obj.birth_year}`));
+	base.append(Card.p("","", `Gender - ${obj.gender}`));
+	base.append(Card.p("","", `Skin Color - ${obj.skin_color}`));
+	base.append(Card.p("","", `Eye Color - ${obj.eye_color}`));
+	base.append(Card.p("","", `Hair Color - ${obj.hair_color}`));
+	base.append(Card.p("","", `Height - ${obj.height} cm`));
+	base.append(Card.p("","", `Weight - ${obj.mass} kg`));
+	base.append(Card.p("","", `Homeworld: ${lookup(obj.homeworld)}`));
+	base.append(Card.p("","", `Species: ${lookup(obj.species[0])}`));
+	article.append(divTrain("Films", obj.films));
+	base.append(article);
+
+	return base;
+}
+
+const cardSpecies = (obj) => {
+
+	const base = Card.div("card", `people${obj.name}`);
+	const article = Card.article();
+	
+	base.append(Card.h("4","","", obj.name));
+	base.append(Card.p("","", `Classification: ${obj.classification}, ${obj.designation}`));
+	base.append(Card.p("","", `Average Lifespan: ${obj.average_lifespan} years`));
+	base.append(Card.p("","", `Average Height: ${obj.average_height} cm`));
+	base.append(Card.p("","", `Skin Colors: ${obj.skin_colors}`));
+	base.append(Card.p("","", `Eye Colors: ${obj.eye_colors}`));
+	base.append(Card.p("","", `Hair Colors: ${obj.hair_colors}`));
+	base.append(Card.p("","", `Homeworld: ${lookup(obj.homeworld)}`));
+	base.append(Card.p("","", `Language: ${obj.language}`));
+	article.append(divTrain("Films", obj.films));
+	article.append(divTrain("Characters", obj.people));
+
+	base.append(article);
+
+	return base;
+
 
 }
 
@@ -188,14 +290,27 @@ setTimeout(function(){
 		SWAPI[props] = SWAPI[props].reduce((a,b) => a.concat(b));
 	}
 
-	//console.log(SWAPI);
 	//Congrats!!! We now have a cached version of SWAPI!
 
+	//I've created a quicksort equations just to return the movies in order
+	const quickSort = (arr) => {
+		let newArr = [];
+		for (var i = 1; i < arr.length + 1; i++){
+		 arr.map(obj => {
+		 	if(obj.episode_id == i){
+		 		newArr.push(obj)};
+			});
+		}
+
+		 return newArr;		
+	}
+	
 	//Let's Iterate them now 
+	//These have to be loaded within the timeout, or else everything will return undefined and throw a billion errors
 	//Note* I could definitly apply DRY standards, but for the sake of readability this is much more clear and concise;
 	
 	//Films
-	const filmsArr = SWAPI.Films;
+	const filmsArr = quickSort(SWAPI.Films);
 	const filmsSection = document.querySelector('#Films');
 	for (i = 0; i < filmsArr.length; i++){
 		filmsSection.append(cardFilms(filmsArr[i]));
@@ -205,49 +320,53 @@ setTimeout(function(){
 	const planetsArr = SWAPI.Planets;
 	const planetsSection = document.querySelector('#Planets');
 	for (i = 0; i < planetsArr.length; i++){
-		planetsSection.append();
+		planetsSection.append(cardPlanets(planetsArr[i]));
 	}
 
 	//Starships
 	const starshipsArr = SWAPI.Starships;
 	const starshipsSection = document.querySelector('#Starships');
 	for (i = 0; i < starshipsArr.length; i++){
-		starshipsSection.append();
+		starshipsSection.append(cardStarhips(starshipsArr[i]));
 	}
 
 	//Vehicles
 	const vehiclesArr = SWAPI.Vehicles;
 	const vehiclesSection = document.querySelector('#Vehicles');
 	for (i = 0; i < vehiclesArr.length; i++){
-		vehiclesSection.append();
+		vehiclesSection.append(cardVehicles(vehiclesArr[i]));
 	}
 
+	//People
 	const peopleArr = SWAPI.People;
 	const peopleSection = document.querySelector('#People');
 	for (i = 0; i < peopleArr.length; i++){
-		peopleSection.append();
+		peopleSection.append(cardPeople(peopleArr[i]));
 	}
 
+	//Species
 	const speciesArr = SWAPI.Species;
 	const speciesSection = document.querySelector('#Species');
 	for (i = 0; i < speciesArr.length; i++){
-		speciesSection.append();
+		speciesSection.append(cardSpecies(speciesArr[i]));
 	}
 }, 15000);
  
 
 
 
-	//Lets bind click events to the buttons
-	//In anticipation of multiple DOM lookups, i'll create an object.
-	const buttons = {
-		filmsButton:document.querySelector('#bFilms'),
-		planetsButton:document.querySelector('#bPlanets'),
-		peopleButton:document.querySelector('#bPeople'),
-		speciesButton:document.querySelector('#bSpecies'),
-		vehiclesButton:document.querySelector('#bVehicles'),
-		starshipsButton:document.querySelector('#bStarships')
-	}
+//Lets bind click events to the buttons
+//In anticipation of multiple DOM lookups, i'll create an object.
+const buttons = {
+	filmsButton:document.querySelector('#bFilms'),
+	planetsButton:document.querySelector('#bPlanets'),
+	peopleButton:document.querySelector('#bPeople'),
+	speciesButton:document.querySelector('#bSpecies'),
+	vehiclesButton:document.querySelector('#bVehicles'),
+	starshipsButton:document.querySelector('#bStarships')
+}
+
+
 
 function hide(){
 	const elem = this.id.replace(this.id[0],"");
@@ -262,4 +381,9 @@ function hide(){
 for (eachButton in buttons){
 	buttons[eachButton].addEventListener("click", hide);
 }
+
+//Here's some nice themed audio too :)
+document.addEventListener("DOMContentLoaded", function(event) {
+
+  });
 
