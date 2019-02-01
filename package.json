@@ -1,0 +1,19 @@
+{
+  "name": "swapi",
+  "version": "1.0.0",
+  "description": "Star Wars: Universe",
+  "main": "script.js",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https:github.com/bnday01/Swapi.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
