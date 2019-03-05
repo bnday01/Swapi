@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "index.php"
+    "start": ""
   },
   "repository": {
     "type": "git",
