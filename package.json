@@ -2,13 +2,13 @@
   "name": "swapi",
   "version": "1.0.0",
   "description": "Star Wars: Universe",
-  "main": "script.js",
+  "main": "server.js",
   "dependencies": {
     "live-server": "^1.2.1"
   },
   "devDependencies": {},
   "scripts": {
-    "start": ""
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
