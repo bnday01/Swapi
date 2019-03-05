@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "index.html"
+    "start": "./index.html"
   },
   "repository": {
     "type": "git",
