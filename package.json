@@ -2,9 +2,11 @@
   "name": "swapi",
   "version": "1.0.0",
   "description": "Star Wars: Universe",
-  "main": "server.js",
+  "main": "script.js",
   "dependencies": {
-    "live-server": "^1.2.1"
+    "express": "^4.16.4",
+    "live-server": "^1.2.1",
+    "nodemon": "^1.18.10"
   },
   "devDependencies": {},
   "scripts": {
