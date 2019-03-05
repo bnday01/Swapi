@@ -350,7 +350,7 @@ setTimeout(function(){
 	for (i = 0; i < speciesArr.length; i++){
 		speciesSection.append(cardSpecies(speciesArr[i]));
 	}
-}, 15000);
+}, 4000);
  
 
 
