@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "live-server index.html"
+    "start": "index.php"
   },
   "repository": {
     "type": "git",
